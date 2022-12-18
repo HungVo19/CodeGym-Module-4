@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+
+</head>
+<body>
+<a th:href="@{/customer/list}">Back to Home</a>
+<div id="form">
+    <form th:action="@{/customer/save}" th:object="${customer}" method="post" novalidate="novalidate">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label>Name</label>
+            <input type="text" th:placeholder="${customer.getName()}" th:field="*{name}"/>
+        </div>
+        <div>
+            <label>Email</label>
+            <input type="text" th:placeholder="${customer.getEmail()}" th:field="*{email}"/>
+        </div>
+        <div>
+            <label>Address</label>
+            <input type="text" th:placeholder="${customer.getAddress()}" th:field="*{address}"/>
+        </div>
+        <div th:switch="${button.getName().toLowerCase()}">
+            <button th:case="create">Create</button>
+            <button th:case="edit">Edit</button>
+            <button th:case="back"><a th:href="@{/customer/list}">Back</a> </button>
+        </div>
+<!--        <div>-->
+<!--            <button th:if="${customer.getId() != null}">Save</button>-->
+<!--        </div>-->
+    </form>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

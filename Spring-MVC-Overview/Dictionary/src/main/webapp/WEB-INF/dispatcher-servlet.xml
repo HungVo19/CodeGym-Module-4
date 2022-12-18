@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--    quy định package sẽ được quét qua bởi IoCContainer để tạo ra các Bean
+            IoCContainer: nơi chứa các Bean đã được quy định trước đó, chờ được gọi
+            IoC: Inversion of Control - nguyên lý đảo ngược quyền điều khiển-->
+    <context:component-scan base-package="com.example.dictionary"/>
+
+    <!--    cho phép sử dụng annotation trong dự án-->
+    <mvc:annotation-driven/>
+
+    <!--    quy định về đường dẫn của view thông qua ViewResolver
+            prefix: phần đường dẫn nằm trước tên view, địa chỉ của thư mục
+            suffix: phần đường dẫn nằm sau tên view, thường là đuôi file-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <beans>
+        <bean name="dictService" class="com.example.dictionary.service.DictService"/>
+    </beans>
+</beans>

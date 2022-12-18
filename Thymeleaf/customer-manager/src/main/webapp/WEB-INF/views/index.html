@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<h3>Customer</h3>
+<h3 th:text="${message}"></h3>
+<div class="notify">
+    <a th:href="@{/customer/showForm/-1}">
+        Add new customer
+    </a>
+</div>
+<table id="customers">
+    <thead>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Address</th>
+    <th>Action</th>
+    </thead>
+    <tbody>
+    <tr th:each="c,cStat : ${customers}">
+        <td th:text="${c.getId()}"></td>
+        <td th:text="${c.getName()}"></td>
+        <td th:text="${c.getEmail()}"></td>
+        <td th:text="${c.getAddress()}"></td>
+        <td>
+            <a th:href="@{/customer/view/{id}(id=${c.getId()})}">View</a>
+            <a th:href="@{/customer/showForm/{id}(id=${c.getId()})}">Edit</a>
+            <a th:href="@{/customer/delete/{id}(id=${c.getId()})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
