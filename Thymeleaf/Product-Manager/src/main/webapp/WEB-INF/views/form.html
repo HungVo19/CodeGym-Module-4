@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{index :: head}">
+</head>
+<body>
+<nav th:replace="~{index :: navbar}"></nav>
+<div class="container mt-4" style="width: 35%">
+  <div class="card border-success">
+    <!--        <img class="card-img-top" src="..." alt="Card image cap">-->
+    <div class="card-body">
+      <h5 th:if="${product.id}" class="card-title">Update</h5>
+      <h5 th:unless="${product.id}" class="card-title">Add New</h5>
+      <form th:action="@{/products/save}" method="post" th:object="${product}">
+        <input type="hidden" th:field="*{id}" th:value="${product.id}">
+        <fieldset class="form-group mb-2">
+          <label class="mb-2">Name</label>
+          <input type="text" class="form-control" th:value="${product.name} ? ${product.name} : ''" th:field="*{name}" required="required">
+        </fieldset>
+        <fieldset class="form-group mb-2">
+          <label class="mb-2">Price</label>
+          <input type="text" class="form-control" th:value="${product.price} ? ${product.price} : ''" th:field="*{price}" required="required">
+        </fieldset>
+        <fieldset class="form-group mb-2">
+          <label class="mb-2">Category</label>
+          <select class="form-control mb-2" th:if="${product.id}" name="category">
+            <option th:each="c:${categories}"  th:value="${c.name}" th:text="${c.name}" th:selected="${product.getCategory().getName() == c.getName()}"></option>
+          </select>
+          <select class="form-control mb-2" th:unless="${product.id}" name="category">
+            <option th:each="c:${categories}"   th:value="${c.name}" th:text="${c.name}"></option>
+          </select>
+        </fieldset>
+        <fieldset class="form-group mb-2">
+          <button type="submit" class="btn btn-success">Save</button>
+          <button type="reset" class="btn btn-secondary"><a th:href="@{/products/list}">Cancel</a></button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>
