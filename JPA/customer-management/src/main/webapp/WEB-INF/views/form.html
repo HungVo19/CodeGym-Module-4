@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{index :: head}">
+</head>
+<body>
+<nav th:replace="~{index :: navbar}"></nav>
+<div class="container mt-4" style="width: 35%">
+  <div class="card border-success">
+    <!--        <img class="card-img-top" src="..." alt="Card image cap">-->
+    <div class="card-body">
+      <h5 th:if="${customer.id}" class="card-title">Update</h5>
+      <h5 th:unless="${customer.id}" class="card-title">Add New</h5>
+      <form th:action="@{/customers/save}" method="post" th:object="${customer}">
+        <input type="hidden" th:field="*{id}" th:value="${customer.id}">
+        <fieldset class="form-group mb-2">
+          <label class="mb-2">First Name</label>
+          <input type="text" class="form-control" th:value="${customer.firstName} ? ${customer.firstName} : ''" th:field="*{firstName}" required="required">
+        </fieldset>
+        <fieldset class="form-group mb-2">
+          <label class="mb-2">Last Name</label>
+          <input type="text" class="form-control" th:value="${customer.lastName} ? ${customer.lastName} : ''" th:field="*{lastName}" required="required">
+        </fieldset>
+        <fieldset class="form-group mb-2">
+          <button type="submit" class="btn btn-success">Save</button>
+          <button type="reset" class="btn btn-secondary"><a th:href="@{/customers/}">Cancel</a></button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

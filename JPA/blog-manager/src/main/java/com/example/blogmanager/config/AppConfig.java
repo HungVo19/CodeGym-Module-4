@@ -118,7 +118,7 @@ public class AppConfig implements WebMvcConfigurer {
     private String fileUpload;
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/image/**")
+        registry.addResourceHandler("/asset/**")
                 .addResourceLocations("file:" + fileUpload);
 
     }

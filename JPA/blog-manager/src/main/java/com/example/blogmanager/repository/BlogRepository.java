@@ -15,8 +15,8 @@ import java.util.List;
 @Repository
 @Transactional
 public class BlogRepository implements IBlogRepository {
-    @Autowired
-//    @PersistenceContext
+//    @Autowired
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Override
@@ -35,13 +35,11 @@ public class BlogRepository implements IBlogRepository {
 
     @Override
     public void save(Blog blog) {
-//        if (blog.getId() != null) {
-//            entityManager.merge(blog);
-//        } else {
-//
-//            entityManager.persist(blog);
-//        }
-        TypedQuery<Blog> query = entityManager.createQuery("select * ")
+        if (blog.getId() != null) {
+            entityManager.merge(blog);
+        } else {
+            entityManager.persist(blog);
+        }
     }
 
     @Override

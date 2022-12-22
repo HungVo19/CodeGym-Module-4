@@ -67,4 +67,10 @@ public class ProductController {
         modelAndView.addObject("product", productService.findOne(id));
         return modelAndView;
     }
+
+    @GetMapping("/remove/{id}")
+    public String remove(@PathVariable Long id){
+        productService.deleteById(id);
+        return "redirect:/products/list";
+    }
 }

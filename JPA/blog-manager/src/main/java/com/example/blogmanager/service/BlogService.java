@@ -1,6 +1,7 @@
 package com.example.blogmanager.service;
 
 import com.example.blogmanager.model.Blog;
+import com.example.blogmanager.model.BlogForm;
 import com.example.blogmanager.repository.IBlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -55,4 +55,11 @@ public class BlogController {
         return "redirect:/blogs";
     }
 
+    @GetMapping("/view/{id}")
+    public ModelAndView view(@PathVariable(name="id") Long id) {
+        ModelAndView modelAndView = new ModelAndView("view");
+        modelAndView.addObject("blog",blogService.findById(id));
+        return modelAndView;
+    }
+
 }
