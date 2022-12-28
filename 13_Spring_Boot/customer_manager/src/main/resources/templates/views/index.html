@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <style>
+        body {
+            /*font-family: 'Varela Round', sans-serif;*/
+            font-size: 1.15rem;
+            background-color: #f6f8fa;
+        }
+
+        a, a:hover {
+            text-decoration: none;
+            color: white;
+        }
+
+        .selector-for-some-widget {
+            box-sizing: content-box;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.16/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+
+        $('input').attr('required', true);
+
+        function getCustomer(customer) {
+            return `
+            <tr>
+                <td>${customer.id}</td>
+                <td>${customer.firstName}</td>
+                <td>${customer.lastName}</td>
+                <td class="text-center">
+                    <button href="" class="btn btn-info" onclick="viewCustomer(${customer.id})">View</button>
+                    <button class="btn btn-warning" onclick="getEditCustomer(${customer.id})">Edit</button>
+                    <button class="btn btn-danger" onclick="deleteCustomer(${customer.id})">Delete</button>
+                </td>
+            </tr>
+            `;
+        }
+
+        function getList() {
+            $.ajax({
+                type: "GET",
+                //tên API
+                url: "http://localhost:8080/customers",
+                //xử lý khi thành công
+                success: function (data) {
+                    // hien thi danh sach o day
+                    let content =
+                        `<thead>
+                    <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                    </thead>`;
+                    for (let i = 0; i < data.length; i++) {
+                        content += getCustomer(data[i]);
+                    }
+                    document.getElementById('dataTable').innerHTML = content;
+                }
+            })
+        }
+
+        function saveCustomer(id) {
+            event.preventDefault();
+
+            if (id == null) {
+                let firstName = $('#firstName').val();
+                let lastName = $('#lastName').val();
+                let customer = {
+                    firstName: firstName,
+                    lastName: lastName
+                }
+                $.ajax({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    type: "POST",
+                    data: JSON.stringify(customer),
+                    url: "http://localhost:8080/customers",
+                    success: getList,
+                })
+                $('#Modal').modal('toggle');
+                $("#form").get(0).reset()
+
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Create Successfully!',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+            } else {
+                let firstName = $('#firstName').val();
+                let lastName = $('#lastName').val();
+                let customer = {
+                    id: id,
+                    firstName: firstName,
+                    lastName: lastName
+                }
+                $.ajax({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    type: "PUT",
+                    data: JSON.stringify(customer),
+                    url: "http://localhost:8080/customers/" + id,
+                    success: getList,
+                })
+                $('#Modal').modal('toggle');
+                $("#form").get(0).reset()
+                document.getElementById('save').setAttribute("onclick", "saveCustomer()");
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Update Successfully!',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+            }
+
+        }
+
+        function deleteCustomer(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: `http://localhost:8080/customers/` + id,
+                        success: function (data) {
+                            Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Delete Successfully!',
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                }
+                            );
+                            getList()
+                        }
+                    })
+                }
+            })
+        }
+
+        function getEditCustomer(id) {
+            $('#Modal').modal('show');
+            $.ajax({
+                type: "GET",
+                url: `http://localhost:8080/customers/` + id,
+                success: function (customer) {
+                    $("#firstName").val(customer.firstName);
+                    $("#lastName").val(customer.lastName);
+                    document.getElementById('save').setAttribute("onclick", "saveCustomer(" + id + ")");
+                }
+            })
+        }
+
+        function viewCustomer(id) {
+            $('#ModalView').modal('show');
+            $.ajax({
+                type: "GET",
+                url: `http://localhost:8080/customers/` + id,
+                success: function (customer) {
+                    $("#viewFirstName").val(customer.firstName);
+                    $("#viewLastName").val(customer.lastName);
+                }
+            })
+        }
+
+        function resetForm() {
+            $("#form").get(0).reset();
+            document.getElementById('save').setAttribute("onclick", "saveCustomer()");
+        }
+
+    </script>
+</head>
+<body onload="getList()">
+<nav class="navbar text-white" style="background: #2c3e50">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white">Customers Manager</a>
+    </div>
+</nav>
+<div class="container mt-4">
+    <div class="container g-0 mt-4">
+        <div class="d-flex bd-highlight mb-3">
+            <div class="me-auto p-0 bd-highlight"><h2>Data Table</h2></div>
+            <div class="p-0 bd-highlight">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Modal">
+                    Create
+                </button>
+
+            </div>
+        </div>
+    </div>
+    <div class="container g-0 mt-4">
+        <div class="d-flex bd-highlight mb-3">
+            <div class="me-auto p-0 bd-highlight">
+                <select class="form-select" aria-label="Default select example" name="Sort">
+                    <option selected>Sort</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="p-0 bd-highlight">
+                <form action="@{/blogs   }" method="get">
+                    <input type="search" class="form-control" placeholder="Search By Name" name="search">
+                </form>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="container mt-2">
+        <table id="dataTable" class="table table-striped"></table>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="form">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="firstName" class="col-form-label">First Name:</label>
+                        <input type="text" class="form-control" id="firstName">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName" class="col-form-label">Last Name:</label>
+                        <input type="text" class="form-control" id="lastName">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="resetForm()">
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-success" onclick="saveCustomer()" id="save">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--- bootstrap js -->
+<!-- View Modal -->
+<div class="modal fade" id="ModalView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="firstName" class="col-form-label">First Name:</label>
+                        <input type="text" class="form-control" id="viewFirstName" name="firstName" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName" class="col-form-label">Last Name:</label>
+                        <input type="text" class="form-control" id="viewLastName" name="lastName" readonly>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancel">Back</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
