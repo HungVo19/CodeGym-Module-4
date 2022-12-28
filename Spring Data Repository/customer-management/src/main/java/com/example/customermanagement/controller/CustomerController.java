@@ -5,9 +5,14 @@ import com.example.customermanagement.model.Province;
 import com.example.customermanagement.service.ICustomerService;
 import com.example.customermanagement.service.IProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/customers")
@@ -18,14 +23,20 @@ public class CustomerController {
     private IProvinceService provinceService;
 
     @ModelAttribute("provinces")
-    public Iterable<Province> provinces(){
-        return provinceService.findAll();
+    public Iterable<Province> provinces(Pageable pageable){
+        return provinceService.findAll(pageable);
     }
 
     @GetMapping
-    public ModelAndView showList() {
+    public ModelAndView showList(@PageableDefault(size = 2) Pageable pageable,
+                                 @RequestParam(name = "search" ) Optional<String> search) {
         ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("customers", customerService.findAll());
+        if (!search.isPresent()) {
+            modelAndView.addObject("customers", customerService.findAll(pageable));
+        } else {
+            modelAndView.addObject("customers",customerService.findAllByLastNameContaining(search.get(),pageable));
+            modelAndView.addObject("search",search.get());
+        }
         return modelAndView;
     }
 
@@ -39,7 +50,12 @@ public class CustomerController {
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("form");
-        modelAndView.addObject("customer", customerService.findById(id));
+        Optional<Customer> customer = customerService.findById(id);
+        if (customer.isPresent()) {
+            modelAndView.addObject("customer", customer.get());
+        } else {
+            return new ModelAndView("index");
+        }
         return modelAndView;
     }
 

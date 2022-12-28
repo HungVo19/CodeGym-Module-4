@@ -14,11 +14,11 @@
         <input type="hidden" th:field="*{id}" th:value="${customer.id}">
         <fieldset class="form-group mb-2">
           <label class="mb-2">First Name</label>
-          <input type="text" class="form-control" th:value="${customer.firstName} ? ${customer.firstName} : ''" th:field="*{customer.get().firstName}" required="required">
+          <input type="text" class="form-control" th:value="${customer.firstName} ? ${customer.firstName} : ''" th:field="*{firstName}" required="required">
         </fieldset>
         <fieldset class="form-group mb-2">
           <label class="mb-2">Last Name</label>
-          <input type="text" class="form-control" th:value="${customer.lastName} ? ${customer.lastName} : ''" th:field="*{customer.get().lastName}" required="required">
+          <input type="text" class="form-control" th:value="${customer.lastName} ? ${customer.lastName} : ''" th:field="*{lastName}" required="required">
         </fieldset>
         <fieldset class="form-group mb-2">
           <label class="mb-2">Province</label>

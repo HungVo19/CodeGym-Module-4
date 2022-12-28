@@ -3,6 +3,7 @@ package com.example.customermanagement.controller;
 import com.example.customermanagement.model.Province;
 import com.example.customermanagement.service.IProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,8 +18,8 @@ public class ProvinceController {
     @Autowired
     IProvinceService provinceService;
     @GetMapping("/provinces")
-    public ModelAndView listProvinces() {
-        Iterable<Province> provinces = provinceService.findAll();
+    public ModelAndView listProvinces(Pageable pageable) {
+        Iterable<Province> provinces = provinceService.findAll(pageable);
         ModelAndView modelAndView = new ModelAndView("/province/list");
         modelAndView.addObject("provinces", provinces);
         return modelAndView;

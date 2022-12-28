@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function savePhone(id) {
+            if(id == null) {
+                //lấy dữ liệu
+                let producer = $('#producer').val();
+                let model = $('#model').val();
+                let price = $('#price').val();
+                let newSmartphone = {
+                    producer: producer,
+                    model: model,
+                    price: price
+                };
+                //gọi ajax
+                $.ajax({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    type: "POST",
+                    data: JSON.stringify(newSmartphone),
+                    //tên API
+                    url: "http://localhost:8080/smartphones",
+                    //xử lý khi thành công
+                    success: successHandler
+                });
+            } else {
+
+            }
+
+                //chặn sự kiện mặc định của thẻ
+                event.preventDefault();
+        }
+
+        function getSmartphone(smartphone) {
+            return `<tr><td >${smartphone.producer}</td><td >${smartphone.model}</td><td >${smartphone.price}</td>` +
+                `<td><button class="deleteSmartphone" onclick="deletePhone(${smartphone.id})" >Delete</button></td></tr>` +
+                `<td><button class="editSmartphone" onclick="editPhone(${smartphone.id})" >Edit</button></td></tr>`;
+        }
+
+        function successHandler() {
+            $.ajax({
+                type: "GET",
+                //tên API
+                url: "http://localhost:8080/smartphones",
+                //xử lý khi thành công
+                success: function (data) {
+                    // hien thi danh sach o day
+                    let content = '    <tr>\n' +
+                        '        <td>Producer</td>\n' +
+                        '        <td>Model</td>\n' +
+                        '        <td>Price</td>\n' +
+                        '        <td colspan="2">Action</td>\n' +
+                        '    </tr>';
+                    for (let i = 0; i < data.length; i++) {
+                        content += getSmartphone(data[i]);
+                    }
+                    document.getElementById('smartphoneList').innerHTML = content;
+                }
+            });
+        }
+
+        function deletePhone(id) {
+            if (confirm("Delete?")) {
+                $.ajax({
+                    type: "DELETE",
+                    //tên API
+                    url: `http://localhost:8080/smartphones/` + id,
+                    //xử lý khi thành công
+                    success: successHandler
+                });
+            }
+        }
+
+        function editPhone(id) {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/smartphones/" + id,
+                success: function (phone) {
+                    $("#producer").val(phone.producer);
+                    $("#model").val(phone.model);
+                    $("#price").val(phone.price);
+                    document.getElementById('button').setAttribute('onclick', `savePhone(${id})`)
+                }
+            })
+        }
+    </script>
+</head>
+<body onload="successHandler()">
+<form id="add-smartphone">
+    <table>
+        <tr>
+            <td>Producer:</td>
+            <td><input type="text" id="producer" placeholder="producer"></td>
+        </tr>
+        <tr>
+            <td>Model:</td>
+            <td><input type="text" id="model" placeholder="model"></td>
+        </tr>
+        <tr>
+            <td>Price:</td>
+            <td><input type="text" id="price" placeholder="price"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" id="button" value="Save" onclick="savePhone()"></td>
+        </tr>
+    </table>
+</form>
+<h1>Smartphone List</h1>
+<table id="smartphoneList">
+    <tr>
+        <td>Producer</td>
+        <td>Model</td>
+        <td>Price</td>
+        <td>Delete</td>
+    </tr>
+</table>
+</body>
+</html>

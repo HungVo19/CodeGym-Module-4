@@ -1,8 +1,11 @@
-package com.example.customermanagement.service;
+package com.example.customermanagement.service.impl;
 
 import com.example.customermanagement.model.Province;
 import com.example.customermanagement.repository.IProvinceRepository;
+import com.example.customermanagement.service.IProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,8 +15,8 @@ public class ProvinceService implements IProvinceService {
     IProvinceRepository provinceRepository;
 
     @Override
-    public Iterable<Province> findAll() {
-        return provinceRepository.findAll();
+    public Page<Province> findAll(Pageable pageable) {
+        return provinceRepository.findAll(pageable);
     }
 
     @Override

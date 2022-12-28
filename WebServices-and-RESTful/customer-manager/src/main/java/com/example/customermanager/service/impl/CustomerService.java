@@ -1,17 +1,17 @@
-package com.example.customermanagement.service;
+package com.example.customermanager.service.impl;
 
-import com.example.customermanagement.model.Customer;
-import com.example.customermanagement.repository.ICustomerRepository;
+import com.example.customermanager.model.Customer;
+import com.example.customermanager.repository.ICustomerRepository;
+import com.example.customermanager.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CustomerService implements ICustomerService {
     @Autowired
-    private ICustomerRepository customerRepository;
+    ICustomerRepository customerRepository;
 
     @Override
     public Iterable<Customer> findAll() {
@@ -19,13 +19,13 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public Optional<Customer> findById(Long id) {
+    public Optional<Customer> findByID(Long id) {
         return customerRepository.findById(id);
     }
 
     @Override
-    public void save(Customer customer) {
-        customerRepository.save(customer);
+    public Customer save(Customer customer) {
+        return customerRepository.save(customer);
     }
 
     @Override
@@ -33,4 +33,3 @@ public class CustomerService implements ICustomerService {
         customerRepository.deleteById(id);
     }
 }
-
