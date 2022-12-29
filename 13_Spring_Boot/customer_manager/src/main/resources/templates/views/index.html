@@ -31,8 +31,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.16/dist/sweetalert2.all.min.js"></script>
     <script type="text/javascript">
 
-        $('input').attr('required', true);
-
         function getCustomer(customer) {
             return `
             <tr>
@@ -76,63 +74,73 @@
         function saveCustomer(id) {
             event.preventDefault();
 
-            if (id == null) {
-                let firstName = $('#firstName').val();
-                let lastName = $('#lastName').val();
-                let customer = {
-                    firstName: firstName,
-                    lastName: lastName
+            let check = true;
+            let inputValid = $('.inputVal');
+            for (let i = 0; i < inputValid.length; i++) {
+                if (inputValid[i].value === '') {
+                    return check = false;
                 }
-                $.ajax({
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    type: "POST",
-                    data: JSON.stringify(customer),
-                    url: "http://localhost:8080/customers",
-                    success: getList,
-                })
-                $('#Modal').modal('toggle');
-                $("#form").get(0).reset()
-
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Create Successfully!',
-                    showConfirmButton: false,
-                    timer: 1000
-                })
-            } else {
-                let firstName = $('#firstName').val();
-                let lastName = $('#lastName').val();
-                let customer = {
-                    id: id,
-                    firstName: firstName,
-                    lastName: lastName
-                }
-                $.ajax({
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    type: "PUT",
-                    data: JSON.stringify(customer),
-                    url: "http://localhost:8080/customers/" + id,
-                    success: getList,
-                })
-                $('#Modal').modal('toggle');
-                $("#form").get(0).reset()
-                document.getElementById('save').setAttribute("onclick", "saveCustomer()");
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Update Successfully!',
-                    showConfirmButton: false,
-                    timer: 1000
-                })
             }
 
+
+            if (check) {
+                if (id == null) {
+                    let firstName = $('#firstName').val();
+                    let lastName = $('#lastName').val();
+                    let customer = {
+                        firstName: firstName,
+                        lastName: lastName
+                    }
+                    $.ajax({
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        type: "POST",
+                        data: JSON.stringify(customer),
+                        url: "http://localhost:8080/customers",
+                        success: getList,
+                    })
+                    $('#Modal').modal('toggle');
+                    $("#form").get(0).reset()
+
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Create Successfully!',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                } else {
+                    let firstName = $('#firstName').val();
+                    let lastName = $('#lastName').val();
+                    let customer = {
+                        id: id,
+                        firstName: firstName,
+                        lastName: lastName
+                    }
+                    $.ajax({
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        type: "PUT",
+                        data: JSON.stringify(customer),
+                        url: "http://localhost:8080/customers/" + id,
+                        success: getList,
+                    })
+                    $('#Modal').modal('toggle');
+                    $("#form").get(0).reset()
+                    document.getElementById('save').setAttribute("onclick", "saveCustomer()");
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Update Successfully!',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                }
+            }
         }
 
         function deleteCustomer(id) {
@@ -249,11 +257,11 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="firstName" class="col-form-label">First Name:</label>
-                        <input type="text" class="form-control" id="firstName">
+                        <input type="text" class="form-control inputVal" id="firstName" required>
                     </div>
                     <div class="form-group">
                         <label for="lastName" class="col-form-label">Last Name:</label>
-                        <input type="text" class="form-control" id="lastName">
+                        <input type="text" class="form-control inputVal" id="lastName" required>
                     </div>
                 </div>
                 <div class="modal-footer">

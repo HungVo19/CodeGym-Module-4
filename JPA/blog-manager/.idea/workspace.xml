@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0451f700-0e87-4d70-b70e-1856414d7fe0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer-management/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../customer-management/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/java/com/example/customermanagement/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/java/com/example/customermanagement/config/AppConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/java/com/example/customermanagement/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/java/com/example/customermanagement/controller/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/java/com/example/customermanagement/controller/ProvinceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/java/com/example/customermanagement/controller/ProvinceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/java/com/example/customermanagement/repository/ICustomerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/java/com/example/customermanagement/repository/ICustomerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/java/com/example/customermanagement/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/java/com/example/customermanagement/service/impl/CustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/java/com/example/customermanagement/service/ICRUDService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/java/com/example/customermanagement/service/ICRUDService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/java/com/example/customermanagement/service/ICustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/java/com/example/customermanagement/service/ICustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/java/com/example/customermanagement/service/ProvinceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/java/com/example/customermanagement/service/impl/ProvinceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/webapp/WEB-INF/views/form.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/webapp/WEB-INF/views/form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/webapp/WEB-INF/views/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/webapp/WEB-INF/views/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/webapp/WEB-INF/views/province/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Spring Data Repository/customer-management/src/main/webapp/WEB-INF/views/province/create.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="HTML File" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2J8ZUNhUOgwHcnaxcoN0mKuXa78" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Code Gym/Module-4/JPA/blog-manager",
+    "nodejs_package_manager_path": "npm",
+    "spring.configuration.checksum": "748020b6c5ec1f8b619be88915c77a7b"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\OneDrive - votranhung\Code Gym\Module-4\JPA\blog-manager\src\main\webapp\WEB-INF\views" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Tomcat 9.0.69" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.69" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/blogs" />
+      <option name="UPDATING_POLICY" value="hot-swap-classes" />
+      <deployment>
+        <artifact name="Gradle : com.example : blog-manager-1.0-SNAPSHOT.war">
+          <settings>
+            <option name="CONTEXT_PATH" value="" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="523474a1-e139-4430-aee7-f3463ee6565d" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="64765" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="Gradle : com.example : blog-manager-1.0-SNAPSHOT.war" />
+        </option>
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0451f700-0e87-4d70-b70e-1856414d7fe0" name="Changes" comment="" />
+      <created>1671461687035</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1671461687035</updated>
+      <workItem from="1671461688513" duration="5775000" />
+      <workItem from="1671467778744" duration="2427000" />
+      <workItem from="1671497794700" duration="12211000" />
+      <workItem from="1671696083844" duration="893000" />
+      <workItem from="1671895852043" duration="25000" />
+      <workItem from="1672038106128" duration="623000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.sun.proxy.$Proxy61" memberName="h" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+</project>
