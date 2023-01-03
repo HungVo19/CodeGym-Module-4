@@ -24,7 +24,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="run()">
 <nav class="navbar text-white" style="background: #2c3e50">
     <div class="container-fluid">
         <a class="navbar-brand text-white">Admin Dashboard</a>
@@ -33,8 +33,8 @@
 <div class="container my-5">
     <nav>
         <div class="nav nav-pills" id="nav-tab" role="tablist">
-            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
-                    type="button" role="tab" aria-controls="nav-home" aria-selected="true">Blog
+            <button class="nav-link active" id="nav-blog-tab" data-bs-toggle="tab" data-bs-target="#nav-blog"
+                    type="button" role="tab" aria-controls="nav-blog" aria-selected="true">Blog
             </button>
             <button class="nav-link" id="nav-category-tab" data-bs-toggle="tab" data-bs-target="#nav-category"
                     type="button" role="tab" aria-controls="nav-category" aria-selected="false"
@@ -47,7 +47,63 @@
         <hr>
     </nav>
     <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
+        <div class="tab-pane fade show active" id="nav-blog" role="tabpanel" aria-labelledby="nav-blog-tab">
+            <div class="container">
+                <div class="row">
+                    <h2 class="text-center">Data table</h2>
+                </div>
+                <div class="row mt-5 mb-3">
+                    <div class="col-8">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#blogModal">
+                            + Add New
+                        </button>
+                    </div>
+                    <div class="col-1">
+                        <select class="form-select" aria-label="Default select example" name="Sort">
+                            <option selected>Sort</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                    <div class="col-3 align-items-end">
+                        <form id="searchBlogForm">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search by Name"
+                                       aria-label="Recipient's username" aria-describedby="searchCategory"
+                                       id="searchBlog">
+                                <button class="btn btn-outline-primary" type="button"
+                                        onclick="getCategories()">Search
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-2">
+                <hr>
+                <table id="blogDataTable" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Description</th>
+                        <th>Posted Date</th>
+                        <th>Category</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="row">
+                <ul class="paginationBlog justify-content-center" style="margin:20px 0; cursor: pointer;">
+                </ul>
+            </div>
+        </div>
         <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab">
             <div class="container">
                 <div class="row">
@@ -72,7 +128,8 @@
                         <form id="searchCategoryForm">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search by Name"
-                                       aria-label="Recipient's username" aria-describedby="searchCategory" id="searchCategory">
+                                       aria-label="Recipient's username" aria-describedby="searchCategory"
+                                       id="searchCategory">
                                 <button class="btn btn-outline-primary" type="button"
                                         onclick="getCategories()">Search
                                 </button>
@@ -145,12 +202,60 @@
         </div>
     </div>
 </div>
+<!--Create/Update Blog-->
+<div class="modal fade" id="blogModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="formBlog" class="form">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Add New Blog</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="blogTitle" class="col-form-label">Title</label>
+                        <input type="text" class="form-control input" id="blogTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="blogAuthor" class="col-form-label">Author</label>
+                        <input type="text" class="form-control input" id="blogAuthor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="blogDescription" class="col-form-label">Description</label>
+                        <textarea class="form-control input" id="blogDescription" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="blogContent" class="col-form-label">Content</label>
+                        <textarea class="form-control input" id="blogContent" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="blogPostedDate" class="col-form-label">Posted Date:</label>
+                        <input type="date" class="form-control input" id="blogPostedDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="blogCategory" class="col-form-label">Category:</label>
+                        <select id="blogCategory" name="countries" class="form_control form-select">
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                            onclick="resetBLogForm()">
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-success" onclick="saveBlog()" id="saveBlg">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!--bootstrap-->
 <script src="../../static/js/bootstrap.bundle.js"></script>
 <!--jquery-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <!--sweetalert2-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.16/dist/sweetalert2.all.min.js"></script>
+<!--CRUD Category-->
 <script type="text/javascript">
     // Category
     let totalPages = 1;
@@ -161,7 +266,7 @@
         if (search === "") {
             url = "http://localhost:8080/categories"
         } else {
-            url = "http://localhost:8080/categories/search/q=" +search;
+            url = "http://localhost:8080/categories/search?q=" + search;
             $("#searchCategoryForm").get(0).reset();
         }
         $.ajax({
@@ -173,19 +278,6 @@
                 // size: 2,
             },
             success: function (response) {
-                // let content =
-                //     `<thead>
-                //     <tr>
-                //         <th>#</th>
-                //         <th>Name</th>
-                //         <th class="text-center">Action</th>
-                //     </tr>
-                //     </thead>`;
-                // for (let i = 0; i < response.length; i++) {
-                //     content += getCategory(response[i]);
-                // }
-                // document.getElementById('categoryDataTable').innerHTML = content;
-
                 $('#categoryDataTable tbody').empty();
                 //add table rows
                 $.each(response.content, (i, category) => {
@@ -193,7 +285,6 @@
                         <td>${category.id}</td>
                         <td> ${category.name}</td>
                         <td class="text-center">
-                    <button href="" class="btn btn-info" onclick="viewCategory(${category.id})">View</button>
                     <button class="btn btn-warning" onclick="getEditCategory(${category.id})">Edit</button>
                     <button class="btn btn-danger" onclick="deleteCategory(${category.id})">Delete</button>
                             </td>
@@ -201,7 +292,7 @@
                     $('#categoryDataTable tbody').append(noteRow);
                 });
 
-                if ($('ul.pagination li').length - 2 != response.totalPage) {
+                if ($('ul.pagination li').length - 2 !== response.totalPage) {
                     // build pagination list at the first time loading
                     $('ul.pagination').empty();
                     buildPagination(response);
@@ -317,19 +408,8 @@
     })()
 
 
-    // function getCategory(category) {
-    //     return `<tr>
-    //         <td>${category.id}</td>
-    //         <td>${category.name}</td>
-    //         <td class="text-center">
-    //                 <button href="" class="btn btn-info" onclick="viewCategory(${category.id})">View</button>
-    //                 <button class="btn btn-warning" onclick="getEditCategory(${category.id})">Edit</button>
-    //                 <button class="btn btn-danger" onclick="deleteCategory(${category.id})">Delete</button>
-    //         </td>
-    //     <tr>`;
-    // }
-
     function getEditCategory(id) {
+        $('#exampleModalLabel1').text('Update Category')
         $('#categoryModal').modal('show');
         $.ajax({
             headers: {
@@ -349,7 +429,7 @@
         event.preventDefault();
 
         let check = true;
-        let inputValid = $('.input');
+        let inputValid = $('#categoryName');
         for (let i = 0; i < inputValid.length; i++) {
             if (inputValid[i].value === '') {
                 return check = false;
@@ -406,7 +486,8 @@
                     title: 'Update Category Successfully!',
                     showConfirmButton: false,
                     timer: 1000
-                })
+                });
+                $('#exampleModalLabel1').text('Create Category');
             }
         }
     }
@@ -444,6 +525,138 @@
     function resetCategoryForm() {
         $(".form").get(0).reset();
         document.getElementById('saveCat').setAttribute("onclick", "saveCategory()");
+        $('#exampleModalLabel1').text('Create Category');
+    }
+
+</script>
+<!--CRUD Blog-->
+<script type="text/javascript">
+    function run() {
+        getBlogs();
+        getAllCategories();
+    }
+
+    function getBlogs() {
+        $.ajax({
+            type: "GET",
+            //tên API
+            url: "http://localhost:8080/blogs",
+            success: function (response) {
+                //add table rows
+                $('#blogDataTable tbody').empty();
+                $.each(response.content, (i, blog) => {
+                    let row = `<tr>
+            <td>${blog.id}</td>
+            <td>${blog.title}</td>
+            <td>${blog.author}</td>
+            <td>${blog.description}</td>
+            <td>${blog.postedDate}</td>
+            <td>${blog.category.name}</td>
+            <td class="text-center">
+                    <button href="" class="btn btn-info" onclick="viewBlog(${blog.id})">View</button>
+                    <button class="btn btn-warning" onclick="getEditBlog(${blog.id})">Edit</button>
+                    <button class="btn btn-danger" onclick="deleteBlog(${blog.id})">Delete</button>
+            </td>
+        <tr>`;
+                    $('#blogDataTable tbody').append(row);
+                });
+            }
+        })
+    }
+
+    function deleteBlog(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "DELETE",
+                    url: `http://localhost:8080/blogs/` + id,
+                    success: function () {
+                        Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: 'Delete Successfully!',
+                                showConfirmButton: false,
+                                timer: 1000
+                            }
+                        );
+                        getBlogs();
+                    }
+                })
+            }
+        })
+    }
+
+    function getAllCategories() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/categories/getAll",
+            success: function (categories) {
+                $.each(categories.content,(i,category) => {
+                    let option = `<option value=${category.id}>${category.name}</option>`
+                    $('#blogCategory').append(option);
+                });
+            }
+        })
+    }
+
+    function saveBlog(id) {
+        event.preventDefault();
+        if (id == null) {
+            let title = $('#blogTitle').val();
+            let author = $('#blogAuthor').val();
+            let description = $('#blogContent').val();
+            let content = $('#blogContent').val();
+            let postedDate = $('#blogPostedDate').val();
+            let category = {
+                id: $('#blogCategory').val(),
+            }
+
+            let blog = {
+                title: title,
+                author: author,
+                description: description,
+                content: content,
+                postedDate: postedDate,
+                category: category
+            }
+
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type: "POST",
+                data: JSON.stringify(blog),
+                url: "http://localhost:8080/blogs",
+                success: getBlogs
+            })
+
+            $('#blogModal').modal('toggle');
+            resetBlogForm();
+
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Create Blog Successfully!',
+                showConfirmButton: false,
+                timer: 1000
+            })
+
+        }
+    }
+
+    function resetBlogForm() {
+        $(".form").get(0).reset();
+        document.getElementById('saveBlg').setAttribute("onclick", "saveBlog()");
+        $('#exampleModalLabel2').text('Create Blog');
     }
 
 </script>

@@ -24,10 +24,15 @@ public class CategoryController {
     public ResponseEntity<Page<Category>> list(@PageableDefault(value = 2) Pageable pageable) {
             return new ResponseEntity<>(categoryService.findAll(pageable), HttpStatus.OK);
     }
-    @GetMapping("/search/{q}")
-    public ResponseEntity<Page<Category>> listSearch(@PathVariable String q,@PageableDefault(value = 2) Pageable pageable) {
+
+    @GetMapping("/getAll")
+    public ResponseEntity<Page<Category>>listAll() {
+        return new ResponseEntity<>(categoryService.findAll(Pageable.unpaged()), HttpStatus.OK);
+    }
+    @GetMapping("/search")
+    public ResponseEntity<Page<Category>> listSearch(@RequestParam(value = "q") String q,@PageableDefault(value = 2) Pageable pageable) {
         Page<Category> page = categoryService.searchByNameContaining(q,pageable);
-            return new ResponseEntity<>(categoryService.searchByNameContaining(q,pageable), HttpStatus.OK);
+            return new ResponseEntity<>(page, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
